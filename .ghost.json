@@ -1,0 +1,10 @@
+{
+  "development": {
+    "apiUrl": "https://luiscastillo-3.ghost.io",
+    "contentApiKey": "42515938794819270ca94a1eec"
+  },
+  "production": {
+    "apiUrl": "https://luiscastillo-3.ghost.io",
+    "contentApiKey": "42515938794819270ca94a1eec"
+  }
+}
