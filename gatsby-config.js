@@ -1,88 +1,51 @@
-const path = require("path");
-const { title, keywords, description, author, defaultLang, trackingId } = require("./config/site");
+var dotenv = require("dotenv");
+dotenv.config();
+
+const { spaceId, accessToken, snipcart } = process.env;
 
 module.exports = {
   siteMetadata: {
-    title,
-    keywords,
-    description,
-    author,
+    title: `OneShopper`,
+    description: `E-Commerce site with Gatsby and React`,
+    author: `@rohitguptab`,
   },
   plugins: [
+    `gatsby-plugin-react-helmet`,
     {
-      resolve: "gatsby-plugin-google-analytics",
+      resolve: `gatsby-source-filesystem`,
       options: {
-        trackingId,
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `OneShopper`,
+        short_name: `starter`,
+        start_url: `/`,
+        background_color: `#663399`,
+        theme_color: `#663399`,
+        display: `minimal-ui`,
+        icon: `src/images/oneshopper-logo.png`,
       },
     },
     {
-      resolve: "gatsby-plugin-manifest",
+      resolve: "gatsby-source-contentful",
       options: {
-        name: title,
-        short_name: "Agency",
-        start_url: "/",
-        background_color: "#ffffff",
-        theme_color: "#fed136",
-        display: "minimal-ui",
-        icon: "content/assets/gatsby-icon.png",
-      },
-    },
-    "gatsby-transformer-remark",
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "markdown",
-        path: `${__dirname}/content`,
-      },
+        spaceId,
+        accessToken
+      }
     },
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: "gatsby-plugin-snipcartv3",
       options: {
-        name: "images",
-        path: `${__dirname}/content/assets/images`,
-      },
-    },
-    "gatsby-plugin-eslint",
-    "gatsby-plugin-react-helmet",
-    "gatsby-transformer-sharp",
-    "gatsby-plugin-sharp",
-    "gatsby-plugin-offline",
-    {
-      resolve: "gatsby-plugin-sass",
-      options: {
-        data: `@import "core.scss";`,
-        includePaths: [path.resolve(__dirname, "src/style")],
-      },
-    },
-    {
-      resolve: "gatsby-plugin-prefetch-google-fonts",
-      options: {
-        fonts: [
-          {
-            family: "Montserrat",
-            variants: [400, 700],
-          },
-          {
-            family: "Kaushan+Script",
-          },
-          {
-            family: "Droid+Serif",
-            variants: [400, 700, "400italic", "700italic"],
-          },
-          {
-            family: "Roboto+Slab",
-            variants: [400, 100, 300, 700],
-          },
-        ],
-      },
-    },
-    {
-      resolve: "gatsby-plugin-i18n",
-      options: {
-        langKeyDefault: defaultLang,
-        useLangKeyLayout: false,
-        pagesPaths: ["/content/"],
+        apiKey: snipcart,
+        autopop: true,
       },
     },
   ],
-};
+}
