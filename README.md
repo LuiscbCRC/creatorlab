@@ -1,85 +1,110 @@
-  <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-  <p align="center">
-    <a href="https://oneshopper.netlify.com/">
-      <img alt="OneShopper" src="https://github.com/Rohitguptab/OneShopper/blob/master/src/images/oneshopper-logo.png" width="200" />
-    </a>
-  </p>
-  <h1 align="center">
-    OneShopper
-  </h1>
-  <img src="https://github.com/rohitguptab/OneShopper/blob/master/docs/screenshot.jpg" />
-  
+# Gatsby Starter Ghost
 
-  Kick off your Ecommerce Website with OneShopper project you can build you site with this, We have used [Gatsby](https://www.gatsbyjs.org/) + [Contenful](https://www.gatsbyjs.org/packages/gatsby-source-contentful/?=Contenful) and [snipcart](https://www.gatsbyjs.org/packages/gatsby-plugin-snipcart/?=snipcart).
-  
-  Live Demo:
-  https://oneshopper.netlify.com
+A starter template to build lightning fast websites with [Ghost](https://ghost.org) & [Gatsby](https://gatsbyjs.org)
+
+**Demo:** https://gatsby.ghost.org
+
+&nbsp;
+
+![gatsby-starter-ghost](https://user-images.githubusercontent.com/120485/50913567-8ab8e380-142c-11e9-9e78-de02ded12fc6.jpg)
+
+&nbsp;
 
 
-  ## 🚀 Quick start
+# Installing
 
-  1.  **Setup this site.**
+```bash
+# With Gatsby CLI
+gatsby new gatsby-starter-ghost https://github.com/TryGhost/gatsby-starter-ghost.git
+```
 
-      Use the Gatsby CLI to Clone this site.
+```bash
+# From Source
+git clone https://github.com/TryGhost/gatsby-starter-ghost.git
+cd gatsby-starter-ghost
+```
 
-      ```sh
-      # Clone this Repositories
-      gatsby new OneShopper https://github.com/Rohitguptab/OneShopper.git
-      ```
+Then install dependencies
 
-  1.  **Setup Contentful Models**
+```bash
+yarn
+```
 
-      Use [contentful-cli](https://github.com/contentful/contentful-cli) to import the models from oneshopper.json
+&nbsp;
 
-      ```
-      contentful space --space-id <CONTENTFUL_SPACE_ID> import --content-file oneshopper.json
-      ```
-      
-      Checkout my below blog how to Import and Export data from ContentFul
-      
-      [https://rohitgupta.netlify.app/import-and-export-data-with-contentful-cli](https://rohitgupta.netlify.app/import-and-export-data-with-contentful-cli)
+# Running
 
-  1.  **Setup your Own Configure Projects.**
+Start the development server. You now have a Gatsby site pulling content from headless Ghost.
 
-      Enter your own key
+```bash
+gatsby develop
+```
 
-      [ContentFul](https://be.contentful.com/login):
-      - spaceId = **Key**
-      - accessToken = **Key**
+By default, the starter will populate content from a default Ghost install located at https://gatsby.ghost.io.
 
-      [snipcart](https://app.snipcart.com/):
-      - snipcart = **Key**
+To use your own install, you will need to edit the `.ghost.json` config file with your credentials. Change the `apiUrl` value to the URL of your Ghost site. For Ghost(Pro) customers, this is the Ghost URL ending in `.ghost.io`, and for people using the self-hosted version of Ghost, it's the same URL used to access your site.
 
-  1.  **Start developing.**
+Next, update the `contentApiKey` value to a key associated with the Ghost site. A key can be provided by creating an integration within Ghost Admin. Navigate to Integrations and click "Add new integration". Name the integration appropriately and click create.
 
-      Navigate into your new site’s directory and start it up.
+Finally, configure your desired URL in `siteConfig.js`, so links (e. g. canonical links) are generated correctly. You can also update other default values, such as `postsPerPage` in this file.
 
-      ```sh
-      cd OneShopper
-      npm install
-      gatsby develop
-      ```
+To use this starter without issues, your Ghost installation needs to be at least on version `2.10.0`.
 
+The default Ghost version that is used for this starter is `3.x`. If your Ghost installation is on a lower version, you will need to pass in a `version` property in your `.ghost.json` settings:
 
-  1.  **Open the source code and start editing!**
+**Ghost >=2.10.0 <3.0.0**
+```json
+{
+    "apiUrl": "https://gatsby.ghost.io",
+    "contentApiKey": "9cc5c67c358edfdd81455149d0",
+    "version": "v2"
+}
+```
 
-      Your site is now running at `http://localhost:8000`!
+**Ghost <=3.0.0**
+```json
+{
+    "apiUrl": "https://gatsby.ghost.io",
+    "contentApiKey": "9cc5c67c358edfdd81455149d0"
+}
+```
 
-      _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
+&nbsp;
 
-      Open the `OneShopper` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+# Deploying with Netlify
 
+The starter contains three config files specifically for deploying with Netlify. A `netlify.toml` file for build settings, a `/static/_headers` file with default security headers set for all routes, and `/static/_redirects` to set Netlify custom domain redirects.
 
-  ## 🎓 Learning Gatsby
+To deploy to your Netlify account, hit the button below.
 
-  Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.org/). Here are some places to start:
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/TryGhost/gatsby-starter-ghost)
 
-  - **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.org/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
+Content API Keys are generally not considered to be sensitive information, they exist so that they can be changed in the event of abuse; so most people commit it directly to their `.ghost.json` config file. If you prefer to keep this information out of your repository you can remove this config and set [Netlify ENV variables](https://www.netlify.com/docs/continuous-deployment/#build-environment-variables) for production builds instead.
 
-  - **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.org/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
+Once deployed, you can set up a [Ghost + Netlify Integration](https://docs.ghost.org/integrations/netlify/) to use deploy hooks from Ghost to trigger Netlify rebuilds. That way, any time data changes in Ghost, your site will rebuild on Netlify.
 
-  ## 💫 Deploy
+&nbsp;
 
-  [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Rohitguptab/OneShopper)
+# Optimising
 
-  <!-- AUTO-GENERATED-CONTENT:END -->
+You can disable the default Ghost Handlebars Theme front-end by enabling the `Make this site private` flag within your Ghost settings. This enables password protection in front of the Ghost install and sets `<meta name="robots" content="noindex" />` so your Gatsby front-end becomes the source of truth for SEO.
+
+&nbsp;
+
+# Extra options
+
+```bash
+# Run a production build, locally
+gatsby build
+
+# Serve a production build, locally
+gatsby serve
+```
+
+Gatsby `develop` uses the `development` config in `.ghost.json` - while Gatsby `build` uses the `production` config.
+
+&nbsp;
+
+# Copyright & License
+
+Copyright (c) 2013-2020 Ghost Foundation - Released under the [MIT license](LICENSE).
