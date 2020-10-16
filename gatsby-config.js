@@ -1,8 +1,6 @@
 var dotenv = require("dotenv");
 dotenv.config();
 
-const { spaceId, accessToken, snipcart } = process.env;
-
 module.exports = {
   siteMetadata: {
     title: `OneShopper`,
@@ -36,14 +34,14 @@ module.exports = {
     {
       resolve: "gatsby-source-contentful",
       options: {
-        spaceId,
-        accessToken
+        spaceId: `wsfyzsdbln1k`,
+        accessToken: `w5Y6sQ33yKmk6REGb6ryzRy5Bntjjy0Ai5sLNBz1WaM`
       }
     },
     {
       resolve: "gatsby-plugin-snipcartv3",
       options: {
-        apiKey: snipcart,
+        apiKey: `ODRlZTI1OGUtMTMxMC00OWNjLTk3MGEtYTA3ZWUxMDRkNmRjNjM3MjQxOTEzMjkwNDY1MDUw`,
         autopop: true,
       },
     },

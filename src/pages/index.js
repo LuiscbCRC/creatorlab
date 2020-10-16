@@ -4,7 +4,6 @@ import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Banner from "../components/banner"
-import LatestBlogs from "../components/latestBlog"
 import Countdown from "../components/countdown"
 import StarRatingComponent from 'react-star-rating-component';
 import { graphql } from "gatsby";
@@ -63,7 +62,6 @@ const IndexPage = data => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `oneshopper`, `react`, `Ecommerce`]} />
     <Banner BannerData={data.data.allContentfulHeaderBanner.edges} />
-    <LatestBlogs data={data.data.allContentfulBlogs} />
     <div className="container">
       <div className="text-center"><h2 className="with-underline">Latest Items</h2></div>
       <IndexPost data={data}></IndexPost>
@@ -136,26 +134,6 @@ export const query = graphql`
         }
       }
       date(formatString: "D MMMM, YYYY")
-    }
-    allContentfulBlogs(limit: 3,sort:{fields:createdAt,order: DESC}) {
-      edges {
-        node {
-          id
-          title
-          slug
-          featureImage {
-            fluid(maxWidth: 1120) {
-              base64
-              aspectRatio
-              src
-              srcSet
-              srcWebp
-              srcSetWebp
-              sizes
-            }
-          }
-        }
-      }
     }
   }
 `
